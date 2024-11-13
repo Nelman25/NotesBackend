@@ -5,8 +5,8 @@ const cors = require("cors");
 const Note = require("./models/note");
 
 app.use(express.json());
-app.use(express.static("dist"));
 app.use(cors());
+app.use(express.static("dist"));
 
 app.get("/api/notes", (req, res) => {
 	Note.find({}).then((notes) => res.json(notes));

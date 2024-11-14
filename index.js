@@ -9,26 +9,26 @@ app.use(cors());
 app.use(express.static("dist"));
 
 app.get("/api/notes", (req, res) => {
-	Note.find({}).then((notes) => res.json(notes));
+  Note.find({}).then((notes) => res.json(notes));
 });
 
 app.get("/api/notes/:id", (req, res) => {
-	Note.findById(req.params.id).then((note) => res.json(note));
+  Note.findById(req.params.id).then((note) => res.json(note));
 });
 
 app.post("/api/notes", (req, res) => {
-	const body = req.body;
+  const body = req.body;
 
-	if (body.content === undefined) {
-		return res.status(400).json({ error: "content missing" });
-	}
+  if (body.content === undefined) {
+    return res.status(400).json({ error: "content missing" });
+  }
 
-	const note = new Note({
-		content: body.content,
-		important: body.important || false,
-	});
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+  });
 
-	note.save().then((savedNote) => res.json(savedNote));
+  note.save().then((savedNote) => res.json(savedNote));
 });
 
 const PORT = process.env.PORT || 3001;
